@@ -12,18 +12,24 @@
         WindowStartupLocation="CenterScreen">
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="120"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ui:SimpleStackPanel Grid.Row="0" Orientation="Horizontal" Margin="20">
-            <Button Width="150" Height="40" Margin="0 0 40 0"
+        <Grid Grid.Row="0" Margin="20">
+            <ui:SimpleStackPanel >
+                <TextBlock Text="Search Order:" Margin="0 0 0 10"></TextBlock>
+                <TextBox Width="250" Height="40" Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"></TextBox>
+            </ui:SimpleStackPanel>
+            <ui:SimpleStackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Width="150" Height="40" Margin="0 0 40 0"
                     Content="Import Excel File"
                     Command="{Binding ImportExcelCommand}">
-            </Button>
-            <Button Width="150" Height="40" Content="Save Excel File"
-                    Command="{Binding SaveExcelCommand}" CommandParameter="{Binding ElementName=wdImport}"> 
-            </Button>
-        </ui:SimpleStackPanel>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding ImportTable}" IsReadOnly="True"></DataGrid>
+                </Button>
+                <Button Width="150" Height="40" Content="Save Excel File"
+                    Command="{Binding SaveExcelCommand}" CommandParameter="{Binding ElementName=wdImport}">
+                </Button>
+            </ui:SimpleStackPanel>
+        </Grid>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding ImportTableView}" IsReadOnly="True"></DataGrid>
     </Grid>
 </Window>

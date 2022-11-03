@@ -9,6 +9,6 @@ namespace ShoeBoxScan.Models.Helpers
 {
     public static class DataHelper
     {
-        public static DataTable ExcelTable;
+        public static List<ImportDataModel> DataTable;
     }
 }

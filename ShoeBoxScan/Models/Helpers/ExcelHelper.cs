@@ -15,10 +15,10 @@ namespace ShoeBoxScan.Models.Helpers
     {
         private static List<string> _ImportColumns = new List<string>()
         {
-            "PO Number", "Total Qty", "UPC", "Label ID", "Customer Size", "Manufaturer Size", "Scan Qty", "User"
+            "PO Number", "Total Qty", "UPC", "Customer Size", "User"
         };
 
-        public static DataTable ReadExcel(string filePath)
+        public static List<ImportDataModel> ReadExcel(string filePath)
         {
             using (XLWorkbook workBook = new XLWorkbook(filePath))
             {
@@ -27,6 +27,8 @@ namespace ShoeBoxScan.Models.Helpers
                 bool firstRow = true;
                 List<string> columnList = new List<string>();
                 int rowIndex = 0, colIndex = 0;
+
+                List<ImportDataModel> dataList = new List<ImportDataModel>();
 
                 foreach (IXLRow row in workSheet.Rows())
                 {
@@ -58,8 +60,22 @@ namespace ShoeBoxScan.Models.Helpers
                 {
                     MessageBox.Show("Table is invalid");
                 }
+                else
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        dataList.Add(new ImportDataModel
+                        {
+                            PO_Number = row["PO Number"].ToString(),
+                            Total_Qty = row["Total Qty"].ToString(),
+                            UPC = row["UPC"].ToString(),
+                            Customer_Size = row["Customer Size"].ToString(),
+                            User = row["User"].ToString()
+                        });
+                    }
+                }
 
-                return dt;
+                return dataList;
             }
         }
     }

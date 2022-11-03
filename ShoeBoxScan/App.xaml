@@ -4,13 +4,14 @@
              xmlns:local="clr-namespace:ShoeBoxScan"
              xmlns:ui="http://schemas.modernwpf.com/2019"
              StartupUri="Views/Group/Base/Scan/ImportView.xaml">
+    <!--StartupUri="Views/Group/Base/Scan/ScanView.xaml"-->
     <!--StartupUri="Views/Group/Base/Scan/ImportView.xaml"-->
     <!--StartupUri="Views/Login/LoginView.xaml"-->
     <!--StartupUri="Views/MainView.xaml"-->
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ui:ThemeResources RequestedTheme="Light"></ui:ThemeResources>
+                <ui:ThemeResources RequestedTheme="Light" AccentColor="#6666ff"></ui:ThemeResources>
                 <ui:XamlControlsResources></ui:XamlControlsResources>
                 <!-- Other merged dictionaries here -->
             </ResourceDictionary.MergedDictionaries>
