@@ -1,0 +1,29 @@
+﻿<Window x:Class="ShoeBoxScan.Views.Group.Base.Scan.ImportView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ShoeBoxScan.Views.Group.Base.Scan"
+        mc:Ignorable="d"
+        x:Name="wdImport"
+        Title="ImportView" Height="450" Width="800"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ui:SimpleStackPanel Grid.Row="0" Orientation="Horizontal" Margin="20">
+            <Button Width="150" Height="40" Margin="0 0 40 0"
+                    Content="Import Excel File"
+                    Command="{Binding ImportExcelCommand}">
+            </Button>
+            <Button Width="150" Height="40" Content="Save Excel File"
+                    Command="{Binding SaveExcelCommand}" CommandParameter="{Binding ElementName=wdImport}"> 
+            </Button>
+        </ui:SimpleStackPanel>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding ImportTable}" IsReadOnly="True"></DataGrid>
+    </Grid>
+</Window>
