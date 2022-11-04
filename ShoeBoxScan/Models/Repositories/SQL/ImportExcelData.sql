@@ -17,6 +17,6 @@ VALUES
     :upc,
     :customer_size,
     :user_id,
-    :import_date,
-    :status
+    to_date(:import_date, 'dd/MM/yyyy'),
+    'A'
 )
