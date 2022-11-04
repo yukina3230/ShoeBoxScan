@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
 using ShoeBoxScan.Models;
 using ShoeBoxScan.Models.Helpers;
+using ShoeBoxScan.Models.Services.Group.Base.Scan;
 using ShoeBoxScan.Views;
 using System;
 using System.Collections.Generic;
@@ -28,8 +29,10 @@ namespace ShoeBoxScan.ViewModels.Group.Base.Scan.Import
         private ObservableCollection<ImportDataModel> _ImportTable;
         public ObservableCollection<ImportDataModel> ImportTable { get => _ImportTable; set { _ImportTable = value; OnPropertyChanged(); } }
 
-        public RelayCommand ImportExcelCommand { get; }
-        public RelayCommand<Window> SaveExcelCommand { get; }
+        public RelayCommand LoadExcelCommand { get; }
+        public RelayCommand<Window> ImportDataCommand { get; }
+
+        private ImportService _ImportService;
 
         public ImportViewModel()
         {
@@ -37,8 +40,10 @@ namespace ShoeBoxScan.ViewModels.Group.Base.Scan.Import
             ImportTableView = CollectionViewSource.GetDefaultView(ImportTable);
             ImportTableView.Filter = new Predicate<object>(Filter);
 
-            ImportExcelCommand = new RelayCommand(ImportExcel);
-            SaveExcelCommand = new RelayCommand<Window>(o => SaveExcel(o), o => true);
+            _ImportService = new ImportService();
+
+            LoadExcelCommand = new RelayCommand(ImportExcel);
+            ImportDataCommand = new RelayCommand<Window>(o => SaveExcel(o), o => true);
         }
 
         private void ImportExcel()
@@ -58,6 +63,11 @@ namespace ShoeBoxScan.ViewModels.Group.Base.Scan.Import
         private void SaveExcel(Window window)
         {
             DataHelper.DataTable = ImportTable;
+
+            if (_ImportService.ImportData(ImportTable))
+            {
+                MessageBox.Show("Done");
+            }
             window.Close();
         }
 

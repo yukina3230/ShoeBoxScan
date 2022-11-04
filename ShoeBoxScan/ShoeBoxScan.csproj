@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\Interfaces\" />
     <Folder Include="Models\Repositories\SQL\" />
-    <Folder Include="Models\Services\" />
   </ItemGroup>
 
 </Project>
