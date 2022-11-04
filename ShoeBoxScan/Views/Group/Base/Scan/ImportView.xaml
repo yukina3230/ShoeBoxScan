@@ -22,10 +22,10 @@
             </ui:SimpleStackPanel>
             <ui:SimpleStackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Width="150" Height="40" Margin="0 0 40 0"
-                    Content="Import Excel File"
+                    Content="Load Excel File"
                     Command="{Binding ImportExcelCommand}">
                 </Button>
-                <Button Width="150" Height="40" Content="Save Excel File"
+                <Button Width="150" Height="40" Content="Import Data"
                     Command="{Binding SaveExcelCommand}" CommandParameter="{Binding ElementName=wdImport}">
                 </Button>
             </ui:SimpleStackPanel>

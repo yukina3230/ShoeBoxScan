@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace ShoeBoxScan.Models.Helpers
 {
     public static class DataHelper
     {
-        public static List<ImportDataModel> DataTable;
+        public static ObservableCollection<ImportDataModel> DataTable;
     }
 }

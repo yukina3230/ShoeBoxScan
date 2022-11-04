@@ -6,6 +6,7 @@ using ShoeBoxScan.Models.Helpers;
 using ShoeBoxScan.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -24,15 +25,15 @@ namespace ShoeBoxScan.ViewModels.Group.Base.Scan.Import
         private ICollectionView _ImportTableView;
         public ICollectionView ImportTableView { get => _ImportTableView; private set { _ImportTableView = value; OnPropertyChanged(); } }
 
-        private List<ImportDataModel> _ImportTable;
-        public List<ImportDataModel> ImportTable { get => _ImportTable; set { _ImportTable = value; OnPropertyChanged(); } }
+        private ObservableCollection<ImportDataModel> _ImportTable;
+        public ObservableCollection<ImportDataModel> ImportTable { get => _ImportTable; set { _ImportTable = value; OnPropertyChanged(); } }
 
         public RelayCommand ImportExcelCommand { get; }
         public RelayCommand<Window> SaveExcelCommand { get; }
 
         public ImportViewModel()
         {
-            ImportTable = new List<ImportDataModel>();
+            ImportTable = new ObservableCollection<ImportDataModel>();
             ImportTableView = CollectionViewSource.GetDefaultView(ImportTable);
             ImportTableView.Filter = new Predicate<object>(Filter);
 
@@ -49,6 +50,8 @@ namespace ShoeBoxScan.ViewModels.Group.Base.Scan.Import
             if ((bool)fileDialog.ShowDialog())
             {
                 ImportTable = ExcelHelper.ReadExcel(fileDialog.FileName);
+                ImportTableView = CollectionViewSource.GetDefaultView(ImportTable);
+                ImportTableView.Filter = new Predicate<object>(Filter);
             }
         }
 
@@ -71,8 +74,9 @@ namespace ShoeBoxScan.ViewModels.Group.Base.Scan.Import
             {
                 if (!string.IsNullOrEmpty(FilterString))
                 {
-                    return data.PO_Number.Contains(FilterString);
+                    return data.PO_Number.Contains(FilterString, StringComparison.OrdinalIgnoreCase);
                 }
+                return true;
             }
 
             return false;

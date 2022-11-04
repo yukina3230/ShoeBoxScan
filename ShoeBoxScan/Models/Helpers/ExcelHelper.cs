@@ -8,6 +8,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using DataTable = System.Data.DataTable;
 using ClosedXML.Excel;
 using System.Windows;
+using System.Collections.ObjectModel;
 
 namespace ShoeBoxScan.Models.Helpers
 {
@@ -18,17 +19,17 @@ namespace ShoeBoxScan.Models.Helpers
             "PO Number", "Total Qty", "UPC", "Customer Size", "User"
         };
 
-        public static List<ImportDataModel> ReadExcel(string filePath)
+        public static ObservableCollection<ImportDataModel> ReadExcel(string filePath)
         {
             using (XLWorkbook workBook = new XLWorkbook(filePath))
             {
                 IXLWorksheet workSheet = workBook.Worksheet(1);
-                DataTable dt = new DataTable();
+                DataTable dataTable = new DataTable();
                 bool firstRow = true;
                 List<string> columnList = new List<string>();
                 int rowIndex = 0, colIndex = 0;
 
-                List<ImportDataModel> dataList = new List<ImportDataModel>();
+                ObservableCollection<ImportDataModel> dataList = new ObservableCollection<ImportDataModel>();
 
                 foreach (IXLRow row in workSheet.Rows())
                 {
@@ -39,18 +40,18 @@ namespace ShoeBoxScan.Models.Helpers
                             //Mark first row
                             if (firstRow && cell.Value.ToString() == _ImportColumns[colIndex])
                             {
-                                dt.Columns.Add(cell.Value.ToString());
+                                dataTable.Columns.Add(cell.Value.ToString());
                                 columnList.Add(cell.Address.ColumnLetter.ToString());
                                 colIndex++;
                             }
                             else if (!firstRow && columnList.Count > 0 && cell.Address.ColumnLetter.ToString() == columnList[colIndex] && !String.IsNullOrEmpty(cell.Value.ToString()))
                             {
-                                dt.Rows[rowIndex - 1][colIndex] = cell.Value.ToString();
+                                dataTable.Rows[rowIndex - 1][colIndex] = cell.Value.ToString();
                                 colIndex++;
                             }
                         }
                     }
-                    dt.Rows.Add();
+                    dataTable.Rows.Add();
                     firstRow = false;
                     rowIndex++;
                     colIndex = 0;
@@ -62,7 +63,12 @@ namespace ShoeBoxScan.Models.Helpers
                 }
                 else
                 {
-                    foreach (DataRow row in dt.Rows)
+                    dataTable = dataTable.Rows.Cast<DataRow>()
+                        .Where(row => !row.ItemArray
+                        .All(field => field is DBNull || string.IsNullOrWhiteSpace(field as string)))
+                        .CopyToDataTable();
+
+                    foreach (DataRow row in dataTable.Rows)
                     {
                         dataList.Add(new ImportDataModel
                         {
