@@ -17,5 +17,7 @@ namespace ShoeBoxScan.Models
         public string Customer_Size { get; set; }
 
         public string User { get; set; }
+
+        public bool IsChecked { get; set; }
     }
 }

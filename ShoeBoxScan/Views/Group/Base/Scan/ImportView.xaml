@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ShoeBoxScan.Views.Group.Base.Scan"
         mc:Ignorable="d"
         x:Name="wdImport"
-        Title="ImportView" Height="450" Width="800"
+        Title="ImportView" Height="500" Width="1000"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True"
         WindowStartupLocation="CenterScreen">
@@ -20,16 +20,35 @@
                 <TextBlock Text="Search Order:" Margin="0 0 0 10"></TextBlock>
                 <TextBox Width="250" Height="40" Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"></TextBox>
             </ui:SimpleStackPanel>
+            <ui:SimpleStackPanel>
+            </ui:SimpleStackPanel>
             <ui:SimpleStackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Width="150" Height="40" Margin="0 0 40 0"
-                    Content="Load Excel File"
-                    Command="{Binding LoadExcelCommand}">
+                <Button Width="150" Height="40" Margin="20 0"
+                        Content="Load Excel File" Command="{Binding LoadExcelCommand}">
                 </Button>
-                <Button Width="150" Height="40" Content="Import Data"
-                    Command="{Binding ImportDataCommand}" CommandParameter="{Binding ElementName=wdImport}">
+                <Button Width="150" Height="40" Content="Import Data" Margin="20 0"
+                        Command="{Binding ImportDataCommand}" CommandParameter="{Binding ElementName=wdImport}">
+                </Button>
+                <Button Width="120" Height="40" Margin="20 0"
+                        Command="{Binding DeleteRowCommand}" CommandParameter="{Binding}">
+                    <ui:SimpleStackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Symbol="Delete" Margin="5 0"></ui:SymbolIcon>
+                        <TextBlock Text="Delete"></TextBlock>
+                    </ui:SimpleStackPanel>
                 </Button>
             </ui:SimpleStackPanel>
         </Grid>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding ImportTableView}" IsReadOnly="True"></DataGrid>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding ImportTableView}"
+                  CanUserAddRows="False" AutoGenerateColumns="False"
+                  EnableColumnVirtualization="False" EnableRowVirtualization="False">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Binding="{Binding IsChecked}"></DataGridCheckBoxColumn>
+                <DataGridTextColumn Header="PO Number" Binding="{Binding PO_Number}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Total Qty" Binding="{Binding Total_Qty}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="UPC" Binding="{Binding UPC}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Customer Size" Binding="{Binding Customer_Size}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="User" Binding="{Binding User}" IsReadOnly="True"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

@@ -93,7 +93,7 @@ namespace ShoeBoxScan.Models.Repositories.Group.Base.Scan
                 fillZero += "0";
             }
 
-            _CurrentKey = "IM" + fillZero + idNumber.ToString();
+            _CurrentKey = String.Concat("IM", fillZero, idNumber.ToString());
 
             return _CurrentKey;
         }

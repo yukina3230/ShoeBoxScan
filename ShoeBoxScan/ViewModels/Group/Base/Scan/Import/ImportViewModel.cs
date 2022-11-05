@@ -32,6 +32,8 @@ namespace ShoeBoxScan.ViewModels.Group.Base.Scan.Import
         public RelayCommand LoadExcelCommand { get; }
         public RelayCommand<Window> ImportDataCommand { get; }
 
+        public RelayCommand DeleteRowCommand { get; }
+
         private ImportService _ImportService;
 
         public ImportViewModel()
@@ -44,6 +46,7 @@ namespace ShoeBoxScan.ViewModels.Group.Base.Scan.Import
 
             LoadExcelCommand = new RelayCommand(ImportExcel);
             ImportDataCommand = new RelayCommand<Window>(o => SaveExcel(o), o => true);
+            DeleteRowCommand = new RelayCommand(DeleteRow);
         }
 
         private void ImportExcel()
@@ -69,6 +72,19 @@ namespace ShoeBoxScan.ViewModels.Group.Base.Scan.Import
                 MessageBox.Show("Done");
             }
             window.Close();
+        }
+
+        private void DeleteRow()
+        {
+            foreach (var item in ImportTable.ToList())
+            {
+                if (item.IsChecked)
+                {
+                    ImportTable.Remove(item);
+                }
+            }
+            ImportTableView = CollectionViewSource.GetDefaultView(ImportTable);
+            ImportTableView.Refresh();
         }
 
         private void FilterData()
