@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShoeBoxScan.Views.Login"
         xmlns:ui="http://schemas.modernwpf.com/2019"
+        x:Name="wdLogin"
         ui:WindowHelper.UseModernWindowStyle="True"
         mc:Ignorable="d"
         Title="LoginView" Height="400" Width="400"
@@ -42,7 +43,7 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="User Id:"></TextBlock>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Password:"></TextBlock>
                 <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding UserId}" Height="40"></TextBox>
-                <PasswordBox Grid.Row="1" Grid.Column="1" x:Name="passwordBox" Height="40"></PasswordBox>
+                <PasswordBox Grid.Row="1" Grid.Column="1" x:Name="passwordBox" PasswordChanged="passwordBox_PasswordChanged" Height="40"></PasswordBox>
             </Grid>
             <Grid Grid.Row="2" Margin="40 0">
                 <Grid.ColumnDefinitions>

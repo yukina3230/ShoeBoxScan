@@ -73,9 +73,9 @@ namespace ShoeBoxScan.Models.Helpers
                         dataList.Add(new ImportDataModel
                         {
                             PO_Number = row["PO Number"].ToString(),
-                            Total_Qty = row["Total Qty"].ToString(),
                             UPC = row["UPC"].ToString(),
                             Customer_Size = row["Customer Size"].ToString(),
+                            Total_Qty = row["Total Qty"].ToString(),
                             User = row["User"].ToString()
                         });
                     }

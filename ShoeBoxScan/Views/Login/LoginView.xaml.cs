@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoeBoxScan.ViewModels.Login;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,19 @@ namespace ShoeBoxScan.Views.Login
     /// </summary>
     public partial class LoginView : Window
     {
+        private LoginViewModel _ViewModel;
+
         public LoginView()
         {
             InitializeComponent();
+            _ViewModel = new LoginViewModel();
+            DataContext = _ViewModel;
+            passwordBox.Password = "16235";
+        }
+
+        private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            _ViewModel.Password = passwordBox.Password;
         }
     }
 }

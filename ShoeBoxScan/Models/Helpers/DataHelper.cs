@@ -10,6 +10,10 @@ namespace ShoeBoxScan.Models.Helpers
 {
     public static class DataHelper
     {
+        public static string UserId;
+
+        public static string Line;
+
         public static ObservableCollection<ImportDataModel> DataTable;
     }
 }

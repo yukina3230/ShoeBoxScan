@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ShoeBoxScan.Views.Group.Base.Scan"
         mc:Ignorable="d"
         x:Name="wdImport"
-        Title="ImportView" Height="500" Width="1000"
+        Title="ImportView" Height="600" Width="1000"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True"
         WindowStartupLocation="CenterScreen">
