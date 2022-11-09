@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoeBoxScan.ViewModels.Group.Base.Scan;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,13 @@ namespace ShoeBoxScan.Views.Group.Base.Scan
     /// </summary>
     public partial class ScanView : Window
     {
+        private ScanViewModel _ViewModel;
+            
         public ScanView()
         {
             InitializeComponent();
+            _ViewModel = new ScanViewModel();
+            DataContext = _ViewModel;
         }
     }
 }

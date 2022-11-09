@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ShoeBoxScan.Views.Group.Base.Scan;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +23,14 @@ namespace ShoeBoxScan.ViewModels
 
         private void LaunchImportView()
         {
-
+            ImportView view = new ImportView();
+            view.Show();
         }
 
         private void LaunchScanView()
         {
-
+            ScanView view = new ScanView();
+            view.Show();
         }
     }
 }

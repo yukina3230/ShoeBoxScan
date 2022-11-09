@@ -66,8 +66,8 @@ namespace ShoeBoxScan.Models.Repositories.Group.Base.Scan
         private void GetSerialKey()
         {
             string cmdStr = FileHelper.GetSQLString("GetLatestID");
-            string result = "", fillZero = "";
-            int idNumber = 0;
+            string result = "", fillZero;
+            int idNumber;
 
             OracleConnection Conn = new OracleConnection(_ConnStr);
             OracleCommand Command = new OracleCommand(cmdStr, Conn);
@@ -77,7 +77,6 @@ namespace ShoeBoxScan.Models.Repositories.Group.Base.Scan
                 if (_SerialFlag)
                 {
                     Conn.Open();
-                    Command = new OracleCommand(cmdStr, Conn);
                     result = Command.ExecuteScalar().ToString();
                     _SerialFlag = false;
                 }

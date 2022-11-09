@@ -18,8 +18,8 @@
                 </Grid.RowDefinitions>
                 <ui:SimpleStackPanel Margin="0 40 0 20" Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBlock Text="ORDER ID:" VerticalAlignment="Center"></TextBlock>
-                    <ComboBox Width="200" Margin="20 0"></ComboBox>
-                    <Button Content="Import Excel" Command="{Binding OpenImportCommand}" Background="#209e62" Foreground="White"></Button>
+                    <ComboBox ItemsSource="{Binding OrderList}" Width="200" Margin="20 0"></ComboBox>
+                    <!--<Button Content="Import Excel" Command="{Binding OpenImportCommand}" Background="#209e62" Foreground="White"></Button>-->
                 </ui:SimpleStackPanel>
             </Grid>
             <Grid Height="80">
@@ -27,8 +27,8 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="200"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBox IsReadOnly="True" Margin="0 0 40 0" Height="70" FontSize="40"></TextBox>
-                <Image></Image>
+                <TextBox Grid.Column="0" IsReadOnly="True" Margin="0 0 40 0" Height="70" FontSize="40"></TextBox>
+                <Image Grid.Column="1" Source="/Assets/bc.png"></Image>
             </Grid>
             <Grid>
                 <DataGrid ItemsSource="{Binding}"></DataGrid>

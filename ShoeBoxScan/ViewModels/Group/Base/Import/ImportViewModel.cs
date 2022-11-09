@@ -66,6 +66,7 @@ namespace ShoeBoxScan.ViewModels.Group.Base.Scan.Import
         private void SaveExcel(Window window)
         {
             DataHelper.DataTable = ImportTable;
+            DataHelper.OrderList = DataHelper.GetOrderList(ImportTable);
 
             if (_ImportService.ImportData(ImportTable))
             {

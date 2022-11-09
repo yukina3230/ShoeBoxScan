@@ -10,7 +10,7 @@
         Title="MainView" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <Menu VerticalAlignment="Top">
+        <Menu Margin="10 0" VerticalAlignment="Top">
             <MenuItem Header="Base">
                 <MenuItem Header="Import Excel File" Command="{Binding ImportCommand}"></MenuItem>
                 <MenuItem Header="Scan Shoe Boxes" Command="{Binding ScanCommand}"></MenuItem>

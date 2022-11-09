@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoeBoxScan.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,13 @@ namespace ShoeBoxScan.Views
     /// </summary>
     public partial class MainView : Window
     {
+        private MainViewModel _ViewModel;
+
         public MainView()
         {
             InitializeComponent();
+            _ViewModel = new MainViewModel();
+            DataContext = _ViewModel;
         }
     }
 }
